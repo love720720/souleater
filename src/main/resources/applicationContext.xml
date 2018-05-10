@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/context 
+					       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+					       http://www.springframework.org/schema/beans 
+					       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	<!-- 服务层 -->
+    <context:component-scan base-package="com.souleater.*.service"/>
+    
+    <!-- 获取spring上下文的工具类 -->
+    <bean class="com.souleater.util.SpringContextUtils"></bean>
+    
+    <!-- 数据库配置读取 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="locations" value="classpath:db-config.xml"/>
+    </bean>
+
+	<!-- 连接池配置 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+       <property name="driverClassName" value="${driverClassName}"/>
+       <property name="url" value="${url}"/>
+       <property name="username" value="${username}"/>
+       <property name="password" value="${password}"/>
+       <property name="filters" value="${password}"/>
+       <property name="initialSize" value="${initialSize}"/>
+       <property name="minIdle" value="${minIdle}"/>
+       <property name="maxActive" value="${maxActive}"/>
+       <property name="maxWait" value="${maxWait}"/>
+       <property name="timeBetweenEvictionRunsMillis" value ="${timeBetweenEvictionRunsMillis}"/>
+       <property name="minEvictableIdleTimeMillis" value ="${minEvictableIdleTimeMillis}"/>
+       <property name="validationQuery" value="${validationQuery}"/>
+       <property name="testWhileIdle" value="${testWhileIdle}"/>
+       <property name="testOnBorrow" value="${testOnBorrow}"/>
+       <property name="testOnReturn" value="${testOnReturn}"/>
+    </bean>
+
+	<!-- sqlSessionFactory配置 -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+  
+  	<!-- mapper注入 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.souleater.*.mapper"/>
+    </bean>
+    
+    <!-- 事物配置 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>	
+    
+</beans>

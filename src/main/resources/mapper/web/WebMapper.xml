@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.souleater.web.mapper.WebMapper">
+
+	<!-- 根据用户名获取用户 -->
+	<select id="getWebLoginUser" resultType="webUser" parameterType="String">
+		SELECT
+			T.ID id,
+			T.NAME name,
+			T.USER_NAME userName,
+			T.PASSWORD password,
+			T.CREATE_TIME createTime,
+			T.LAST_MODIFY_TIME lastModifyTime
+		FROM
+			T_SER_WEB_USER T
+		WHERE
+			T.USER_NAME = #{userName}
+		LIMIT 1
+	</select>
+	
+	<!-- 修改用户密码 -->
+	<update id="updateWebUserPassword" parameterType="webUser">
+		UPDATE 
+			T_SER_WEB_USER T
+		SET
+			T.PASSWORD = #{password},
+			T.LAST_MODIFY_TIME = SYSDATE()
+		WHERE
+			T.ID = #{id}
+		AND
+			T.USER_NAME = #{userName}
+	</update>
+	
+</mapper>

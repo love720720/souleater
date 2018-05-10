@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.souleater.log.mapper.LogMapper">
+
+	<!-- 插入一条操作日志 -->
+	<insert id="insertOperateLog" parameterType="log">
+		INSERT INTO T_SER_OPERATE_LOG(
+			USER_ID,
+			OPEN_ID,
+			DESCRIPTION,
+			IP,
+			CREATE_TIME,
+			LAST_MODIFY_TIME
+		)VALUES(
+			#{userId},
+			#{openId},
+			#{description},
+			#{ip},
+			SYSDATE(),
+			SYSDATE()
+		)
+	</insert>
+	
+	<!-- 插入一条异常日志 -->
+	<insert id="insertExceptionLog" parameterType="log">
+		INSERT INTO T_SER_EXCEPTION_LOG(
+			USER_ID,
+			OPEN_ID,
+			METHOD,
+			DESCRIPTION,
+			PARAMS,
+			EXCEPTION,
+			IP,
+			CREATE_TIME,
+			LAST_MODIFY_TIME
+		)VALUES(
+			#{userId},
+			#{openId},
+			#{method},
+			#{description},
+			#{params},
+			#{exception},
+			#{ip},
+			SYSDATE(),
+			SYSDATE()
+		)
+	</insert>
+	
+</mapper>

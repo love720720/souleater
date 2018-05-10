@@ -1,0 +1,9 @@
+.idea/souleater.iml
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/modules.xml
+.idea/uiDesigner.xml
+.idea/workspace.xml
+out/
+target/
+temp/

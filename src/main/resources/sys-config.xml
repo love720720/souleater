@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>  
+
+	<comment>sys-config</comment>
+	<!-- 微信 -->
+    <entry key="api">https://api.weixin.qq.com</entry>
+    <entry key="appId">wxcd425ac4f3151a5a</entry>
+    <entry key="appsecret">3990d174d223d12f884757f64c1cec04</entry>
+    <entry key="token">ec4ff25c4b3f44ee810a14206fec6159</entry>
+    <entry key="oauthBaseUrl">https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{appId}&amp;redirect_uri=#{redirectUrl}&amp;response_type=code&amp;scope=snsapi_base&amp;state=#{state}#wechat_redirect</entry>
+    <entry key="oauthUserInfoUrl">https://open.weixin.qq.com/connect/oauth2/authorize?appid=#{appId}&amp;redirect_uri=#{redirectUrl}&amp;response_type=code&amp;scope=snsapi_userinfo&amp;state=#{state}#wechat_redirect</entry>
+	<!-- 微信 -->
+
+</properties>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="souleater:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="souleater.war">
+      <element id="artifact" artifact-name="souleater:war exploded" />
+    </root>
+  </artifact>
+</component>

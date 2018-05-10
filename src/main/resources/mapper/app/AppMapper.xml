@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.souleater.app.mapper.AppMapper">
+
+	<!-- 插入或更新一条关注用户 -->
+	<insert id="insertAppUser" parameterType="String">
+		INSERT INTO T_SER_APP_USER(
+			OPEN_ID,
+			STATUS,
+			CREATE_TIME,
+			LAST_MODIFY_TIME
+		)VALUES(
+			#{openId},
+			0,
+			SYSDATE(),
+			SYSDATE()
+		)
+	</insert>
+	
+	<!-- 根据openId修改关注状态 -->
+	<update id="updateAppUser" parameterType="appUser">
+		UPDATE
+			T_SER_APP_USER
+		SET
+			STATUS = #{status},
+			LAST_MODIFY_TIME = SYSDATE()
+		WHERE
+			OPEN_ID = #{openId}
+	</update>
+	
+	<!-- 根据openId获取的用户 -->
+	<select id="getAppUser" resultType="appUser" parameterType="String">
+		SELECT
+			OPEN_ID openId,
+			STATUS status
+		FROM
+			T_SER_APP_USER
+		WHERE
+			OPEN_ID = #{openId}
+	</select>
+	
+	<!-- 获取已关注的用户openId -->
+	<select id="getAppUserList" resultType="String" parameterType="appUser">
+		SELECT
+			OPEN_ID openId
+		FROM
+			T_SER_APP_USER
+		WHERE
+			STATUS = 0
+		LIMIT
+			#{index},#{count}
+	</select>
+	
+	<!-- 获取已关注的用户总数 -->
+	<select id="getAppUserListCount" resultType="Integer">
+		SELECT
+			COUNT(ID) totalCount
+		FROM
+			T_SER_APP_USER
+		WHERE
+			STATUS = 0
+	</select>
+	
+	<!-- 获取微信模板消息内容 -->
+	<select id="getTemplate" parameterType="String" resultType="appTemplate">
+		SELECT
+			ID id,
+			TEMPLATE_KEY templateKey,
+			TEMPLATE_ID templateId,
+			TITLE title,
+			DESCRIPTION description,
+			PIC_URL picUrl,
+			URL url,
+			CREATE_TIME createTime,
+			LAST_MODIF_TIME lastModifTime
+		FROM
+			T_SER_APP_TEMPLATE
+		WHERE
+			TEMPLATE_KEY = #{templateKey}
+	</select>
+	
+</mapper>

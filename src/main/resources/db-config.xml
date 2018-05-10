@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>db-config</comment>
+	
+	<!-- 这一项可配可不配，如果不配置druid会根据url自动识别dbType，然后选择相应的driverClassName -->
+    <entry key="driverClassName">com.mysql.jdbc.Driver</entry>
+    
+    <!-- 连接数据库的url，不同数据库不一样。 -->
+    <!-- 例如： mysql : jdbc:mysql://10.20.153.104:3306/druid2 -->
+    <!-- oracle : jdbc:oracle:thin:@10.20.149.85:1521:ocnauto -->
+    <entry key="url">jdbc:mysql://127.0.0.1:3306/test</entry>
+    
+    <!-- 连接数据库的用户名 -->
+    <entry key="username">root</entry>
+    
+    <!-- 连接数据库的密码。如果你不希望密码直接写在配置文件中，  -->
+    <entry key="password">root</entry>
+    
+    <!-- 属性类型是字符串，通过别名的方式配置扩展插件 -->
+    <!-- 监控统计用的filter:stat -->
+    <!-- 日志用的filter:log4j -->
+    <!-- 防御sql注入的filter:wall -->
+    <entry key="filters">stat</entry>
+    
+    <!-- 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 -->
+    <entry key="initialSize">1</entry>
+    
+    <!-- 最小连接池数量 -->
+    <entry key="minIdle">1</entry>
+    
+    <!-- 最大连接池数量 -->
+    <entry key="maxActive">20</entry>
+    
+    <!-- 获取连接时最大等待时间，单位毫秒。配置了maxWait之后， 缺省启用公平锁，并发效率会有所下降， 如果需要可以通过配置useUnfairLock属性为true使用非公平锁。 -->
+    <entry key="maxWait">600000</entry>
+    
+    <!-- 有两个含义： 1) Destroy线程会检测连接的间隔时间 2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明 -->
+    <entry key="timeBetweenEvictionRunsMillis">60000</entry>
+    
+    <!-- Destory线程中如果检测到当前连接的最后活跃时间和当前时间的差值大于minEvictableIdleTimeMillis，则关闭当前连接。 -->
+    <entry key="minEvictableIdleTimeMillis">300000</entry>
+    
+    <!-- 用来检测连接是否有效的sql，要求是一个查询语句 -->
+    <!-- 如果validationQuery为null，testOnBorrow、testOnReturn、 testWhileIdle都不会其作用 -->
+    <entry key="validationQuery">SELECT 'x'</entry>
+    
+    <!-- 建议配置为true，不影响性能，并且保证安全性 -->
+    <!-- 如果空闲时间大于 timeBetweenEvictionRunsMillis， 执行validationQuery检测连接是否有效 -->
+    <entry key="testWhileIdle">true</entry>
+    
+    <!-- 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+    <entry key="testOnBorrow">true</entry>
+    
+    <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能  -->
+    <entry key="testOnReturn">false</entry>
+
+</properties>
